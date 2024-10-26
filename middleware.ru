@@ -1,8 +1,16 @@
+require "rack/runtime"
+require "rack/auth/basic"
+
+use Rack::Runtime
+use Rack::Auth::Basic do |username, password|
+  username == "admin" && password == "admin"
+end
+
 class App
   def call(env)
     [
       200,
-      { "Content-Type" => "text/plain" },
+      { "content-type" => "text/plain" },
       ["hello"]
     ]
   end
